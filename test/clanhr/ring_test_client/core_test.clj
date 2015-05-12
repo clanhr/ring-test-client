@@ -15,16 +15,15 @@
 (defn- replier
   "Replies with ok"
   ([]
-   (reply/ok))
+   (reply/ok {:success true}))
   ([request]
-   (reply/ok request)))
+   (reply/ok {:success true})))
 
 (defroutes test-routes
-  (GET "/" [] replier)
+  (GET "/" [] (replier))
   (POST "/post" request (replier request))
   (PUT "/put" request (replier request))
   (GET "/auth-get" request (replier request)))
-
 
 (def app
   (-> (core/routes test-routes)
@@ -32,3 +31,6 @@
 
 (deftest http-get
   (is (= 200 (:status (client/http-get app "/")))))
+
+(deftest http-post
+  (is (= 200 (:status (client/post app "/post")))))
