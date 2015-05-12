@@ -21,7 +21,16 @@
    (post app path {}))
   ([app path data]
     (let [response (app (request :post path (json/dump data)))]
-     (assoc response :body (json/build (:body response))))))
+      (assoc response :body (json/build (:body response))))))
+
+(defn put
+  "Creates a PUT request. Translates edn -> json -> edn"
+  ([app path]
+   (put app path {}))
+  ([app path data]
+    (let [response (app (request :put path (json/dump data)))]
+      (println response)
+      (assoc response :body (json/build (:body response))))))
 
 (defn auth-put
   "Creates a PUT request authed for the given user. Translates edn -> json -> edn"

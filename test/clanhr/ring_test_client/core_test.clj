@@ -29,8 +29,23 @@
   (-> (core/routes test-routes)
       (compojure.handler/api)))
 
+(def user {:token 1})
+
 (deftest http-get
   (is (= 200 (:status (client/http-get app "/")))))
 
+(deftest http-auth-get
+  (is (= 200 (:status (client/auth-get app user "/")))))
+
 (deftest http-post
   (is (= 200 (:status (client/post app "/post")))))
+
+(deftest http-auth-post
+  (is (= 200 (:status (client/auth-post app user "/post")))))
+
+(deftest http-put
+  (is (= 200 (:status (client/put app "/put")))))
+
+(deftest http-auth-put
+  (is (= 200 (:status (client/auth-put app user "/put")))))
+
