@@ -31,6 +31,9 @@
 
 (def user {:token 1})
 
+(deftest http-plain-get
+  (is (= 200 (:status (client/http-plain-get app "/")))))
+
 (deftest http-get
   (is (= 200 (:status (client/http-get app "/")))))
 

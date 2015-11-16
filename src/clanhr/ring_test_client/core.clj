@@ -5,6 +5,14 @@
   (:use clojure.test
         ring.mock.request))
 
+(defn http-plain-get
+  "Creates a GET request. Translates edn -> json -> edn"
+  ([app path]
+   (app (request :get path)))
+  ([app path data hh]
+   (app (-> (request :get path)
+            (header (first hh) (second hh))))))
+
 (defn http-get
   "Creates a GET request. Translates edn -> json -> edn"
   ([app path]
