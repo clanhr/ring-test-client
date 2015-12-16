@@ -21,6 +21,7 @@
 
 (defroutes test-routes
   (GET "/" [] (replier))
+  (GET "/plain" [] (reply/ok "test"))
   (POST "/post" request (replier request))
   (PUT "/put" request (replier request))
   (GET "/auth-get" request (replier request)))
@@ -39,6 +40,9 @@
 
 (deftest http-auth-get
   (is (= 200 (:status (client/auth-get app user "/")))))
+
+(deftest http-auth-get
+  (is (= 200 (:status (client/auth-plain-get app user "/plain")))))
 
 (deftest http-post
   (is (= 200 (:status (client/post app "/post")))))

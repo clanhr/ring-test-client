@@ -67,3 +67,11 @@
                     (assoc-in [:headers "x-clanhr-auth-token"] (:token user)))
         response (app request)]
     (assoc response :body (json/build (:body response)))))
+
+(defn auth-plain-get
+  "Creates a GET request authed for the given user."
+  [app user path]
+  (let [request (-> (request :get path)
+                    (assoc-in [:headers "x-clanhr-auth-token"] (:token user)))
+        response (app request)]
+    response))

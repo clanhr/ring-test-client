@@ -1,4 +1,4 @@
-(defproject clanhr/ring-test-client "0.2.0"
+(defproject clanhr/ring-test-client "0.3.0"
   :description "Utilities for testing controllers on top of ring"
   :url "https://github.com/clanhr/ring-test-client"
   :license {:name "Eclipse Public License"
